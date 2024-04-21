@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://cl1v0jvgeg26w"]
+
+[ext_resource type="Script" path="res://World/Player/player.gd" id="1_tfqoc"]
+[ext_resource type="Texture2D" uid="uid://dnajo6qu8xb5u" path="res://World/Player/player.png" id="2_ein14"]
+[ext_resource type="AudioStream" uid="uid://cktyrx2v8xien" path="res://Audio/jump.wav" id="3_agg7g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vepgh"]
+atlas = ExtResource("2_ein14")
+region = Rect2(0, 0, 37, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2enbk"]
+atlas = ExtResource("2_ein14")
+region = Rect2(37, 0, 37, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywgkk"]
+atlas = ExtResource("2_ein14")
+region = Rect2(0, 0, 37, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ib7j"]
+atlas = ExtResource("2_ein14")
+region = Rect2(37, 0, 37, 74)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ukfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vepgh")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2enbk")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywgkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ib7j")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxfgi"]
+size = Vector2(29, 71)
+
+[node name="Player" type="CharacterBody2D"]
+process_mode = 1
+collision_layer = 2
+script = ExtResource("1_tfqoc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_0ukfu")
+animation = &"Run"
+autoplay = "Run"
+frame_progress = 0.134828
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -18.5)
+shape = SubResource("RectangleShape2D_sxfgi")
+
+[node name="WallDetection1" type="RayCast2D" parent="."]
+position = Vector2(0, -15)
+target_position = Vector2(20, 0)
+
+[node name="WallDetection2" type="RayCast2D" parent="."]
+position = Vector2(0, -15)
+target_position = Vector2(-20, 0)
+
+[node name="WallJumpTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_agg7g")
+
+[connection signal="timeout" from="WallJumpTimer" to="." method="_on_wall_jump_timer_timeout"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnbox7saogsbi"]
+
+[ext_resource type="Script" path="res://World/Door/door.gd" id="1_amsk6"]
+[ext_resource type="Texture2D" uid="uid://b7l5l2bdvrejo" path="res://World/Door/door.png" id="2_lxj28"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ugdr1"]
+radius = 20.0
+height = 80.0
+
+[node name="Door" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_amsk6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_lxj28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ugdr1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
