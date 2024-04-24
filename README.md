@@ -6,10 +6,14 @@ This is a short, semi-hard, platformer game in an underground ice cave. Which me
 
 This game was made for the Micro Jam 12: https://itch.io/jam/micro-jam-012
 
+The itch.io page: https://wildcodercrab.itch.io/walking-on-ice
+
 
 Music used in the game:
-  https://opengameart.org/content/ice-cave
-  https://opengameart.org/content/8-bit-lofi-ice-cave
+
+https://opengameart.org/content/ice-cave
+
+https://opengameart.org/content/8-bit-lofi-ice-cave
 
 ![Screenshot3](https://github.com/WildCoderCrab/Walking-on-Ice/assets/139665638/5f084ab9-2876-4317-b8ad-795cd5b08e44)
 
